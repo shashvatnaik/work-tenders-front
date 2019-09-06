@@ -8,6 +8,9 @@ export default (props) => {
             <li>
                 home
             </li>
+            <li>
+                about
+            </li>
         </ul>
     </div>)
 }
