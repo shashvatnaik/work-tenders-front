@@ -8,6 +8,7 @@ import Navbar from './components/navbar';
 import Sidebar from './containers/sidebar';
 import Login from './components/login';
 import Register from './containers/register';
+import Home from './containers/home';
 
 import {getTypes} from './actionMethods/authMethods';
 
@@ -37,21 +38,21 @@ class App extends React.Component {
     const PrivateRoute = ({ component: Component, ...rest }) => {
       return (
         <Route {...rest} render={(routeProps) => (
-          !this.props.user ? <div className="app-wrapper">
+          this.props.user ? <div className="app-wrapper">
             <Sidebar />
             <div className="sidebar-open-body">
-              <Navbar />
+              <Navbar />  
               <Component {...routeProps} />
             </div>
           </div> :
-            <Redirect to='/' />)} />
+            <Redirect to='/login' />)} />
       )
     }
     return (
       <Switch>
-        <PublicRoute exact path='/' component={Login} />
+        <PublicRoute exact path='/login' component={Login} />
         <PublicRoute exact path='/register' component={Register} />
-        <PrivateRoute exact path='/home' component={Login} />
+        <PrivateRoute exact path='/' component={Home} />
       </Switch>
     )
   }

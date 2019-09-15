@@ -54,7 +54,7 @@ class Login extends React.Component {
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label>Email:</Label>
-                        <Input type="email" name="email" onChange={this.handleChange} />
+                        <Input required type="email" name="email" onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup>
                         <Label>Password:</Label>
