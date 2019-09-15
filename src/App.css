@@ -31,3 +31,23 @@
     transform: rotate(360deg);
   }
 }
+
+.user-type {
+  height: 2vh;
+  width: 2vw;
+}
+
+.loader {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  padding-top: 42vh;
+  padding-left: 49vw;
+  z-index: 9999;
+  background-color: rgba(0,0,0,0.1);
+}
+
+.profileImage {
+  height: 100px;
+  width: 100px;
+}

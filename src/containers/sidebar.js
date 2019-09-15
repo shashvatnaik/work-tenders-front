@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import SidebarComponent from '../components/sidebar';
+import logoImage from '../logo.svg';
 
 class SideBar extends React.Component {
     constructor(props) {
@@ -25,14 +26,11 @@ class SideBar extends React.Component {
     render() {
         return (
             <div className={"col-md-2 col-xs-12 sidebar bg-white hide"} id="sidebar-wrapper">
-                <a className="pull-left show-menu" onClick={this.props.toggleSidebar}>
-                  <i className="fa fa-bars fa-2x"/>
-                </a>
-                {/* <Link className="" to="/">
+                <Link className="" to="/">
                     <img className="logo-sidebar img-responsive"
-                         src="https://s3.ap-south-1.amazonaws.com/tenderwatch/logo3%401024.png" alt="Tender watch"
+                         src={logoImage} alt="Work Tenders"
                          width="150"/>
-                </Link> */}
+                </Link>
                 <div className="sidebar-sticky">
                     <SidebarComponent
                         {...this.props}

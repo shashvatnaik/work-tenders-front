@@ -1,16 +1,21 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 import './sidebar.css';
 
-export default (props) => {
-    return (<div>
-        <ul>
-            <li>
-                home
-            </li>
-            <li>
-                about
-            </li>
-        </ul>
-    </div>)
-}
+const sidebarComponent = (props) => {
+    const {user} = props;
+    return (
+        <React.Fragment>
+            <ul className="nav flex-column">
+                <li name="Home" className={props.active === 'Home' ? "nav-item active" : "nav-item active"}>
+                    <Link className="nav-link" onClick={props.activeLink} name="Home" to="/"><i className="fa fa-home"/>
+                        <span> Home </span>
+                    </Link>
+                </li>
+            </ul>
+        </React.Fragment>
+    )
+};
+
+export default sidebarComponent;

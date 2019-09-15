@@ -8,6 +8,7 @@ import Navbar from './components/navbar';
 import Sidebar from './containers/sidebar';
 import Login from './components/login';
 import Register from './containers/register';
+import Loader from './components/loader';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,18 +17,31 @@ class App extends React.Component {
   }
 
   render() {
+    const {loading} = this.props;
     const PublicRoute = ({ component: Component, ...rest }) => {
       return (
         <Route {...rest} render={(routeProps) => (
-          !this.props.user ? <React.Fragment><Sidebar /><Navbar /><Component {...routeProps} /></React.Fragment> :
-            <Redirect to='/' />)} />
+          !this.props.user ? <div className="app-wrapper">
+              <Navbar />
+              {/* {loading.value && <Loader />} */}
+              <Component {...routeProps} />
+          </div > :
+            <Redirect to='/' />)
+        } />
       )
     }
 
     const PrivateRoute = ({ component: Component, ...rest }) => {
       return (
         <Route {...rest} render={(routeProps) => (
-          !this.props.user ? <React.Fragment><Sidebar /> <div><Navbar /><Component {...routeProps} /></div></React.Fragment> :
+          !this.props.user ? <div className="app-wrapper">
+            <Sidebar />
+            <div className="sidebar-open-body">
+              <Navbar />
+              {loading.value && <Loader />}
+              <Component {...routeProps} />
+            </div>
+          </div> :
             <Redirect to='/' />)} />
       )
     }
@@ -44,7 +58,8 @@ class App extends React.Component {
 const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
 const mapStateToProps = (state) => {
   return {
-    user: state.auth.user
+    user: state.auth.user,
+    loading: state.loading
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);
