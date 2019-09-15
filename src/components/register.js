@@ -1,6 +1,9 @@
 import React from 'react';
 import { Input, Form, Label, FormGroup, Button, Row, Col } from 'reactstrap';
 import FileUploader from 'react-firebase-file-uploader';
+import {Link} from 'react-router-dom';
+
+import userDefault from '../images/user-default.png';
 
 const Register = (props) => {
     const { handleChange,
@@ -14,17 +17,17 @@ const Register = (props) => {
         handleUploadSuccess,
         handleUploadError,
         handleUploadStart,
-        avatarURL
+        avatarURL,
+        selectedType
     } = props;
-    console.log('avtarurl in component:',avatarURL);
     return (<div className="paper margin-20">
-        <h3 className="primary-text center-text"><Label>Register</Label></h3>
-        <Form className="padding-20">
+        <Form className="padding-20" onSubmit={handleSubmit}>
+        <h3 className="primary-text"><Label>Register</Label></h3>
             <Row>
                 <Col>
                     <FormGroup>
-                        <Label className="primary-text">Email*</Label>
-                        <Input name="email" onChange={handleChange} />
+                        <Label className="primary-text" color="text-success">Email*</Label>
+                        <Input type="email" name="email" onChange={handleChange} />
                     </FormGroup>
                     <FormGroup>
                         <Label className="primary-text">Name*</Label>
@@ -32,11 +35,11 @@ const Register = (props) => {
                     </FormGroup>
                     <FormGroup>
                         <Label className="primary-text">Password*</Label>
-                        <Input name="password" onChange={handleChange} />
+                        <Input type="password" name="password" onChange={handleChange} />
                     </FormGroup>
                     <FormGroup>
                         <Label className="primary-text">Confirm Password*</Label>
-                        <Input name="cpassword" onChange={handleChange} />
+                        <Input type="password" name="cpassword" onChange={handleChange} />
                     </FormGroup>
                     <FormGroup>
                         <Label className="primary-text">Personal Info</Label>
@@ -45,7 +48,8 @@ const Register = (props) => {
                 </Col>
                 <Col>
                     <Label className="primary-text">Upload Profile Picture</Label>
-                    <img className="profileImage" src={avatarURL} />
+                    <div />
+                    <img alt="profile" className="profileImage" src={avatarURL || userDefault} />
                     <div />
                     <FileUploader
                         accept="image/*"
@@ -57,31 +61,35 @@ const Register = (props) => {
                         onUploadSuccess={handleUploadSuccess}
                         onProgress={handleProgress}
                     />
-                    <FormGroup>
-                        <Label className="primary-text">Select Country</Label>
-                        <Input onChange={handleChange} type="select" name="country" id="country">
-                            <option default value={""}>Please Select A country</option>
-                            {countryData.map(x => <option key={x.id} value={x}>{x.name}  </option>)}
-                        </Input>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label className="primary-text">Select State</Label>
-                        <Input onChange={handleChange} type="select" name="state" id="state">
-                            <option default value={""}>Please Select A State</option>
-                            {stateData.map(x => <option  key={x.id} value={x}>{x.name}  </option>)}
-                        </Input>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label className="primary-text">Select City</Label>
-                        <Input onChange={handleChange} type="select" name="city" id="city"  >
-                            <option default value={""}>Please Select A City</option>
-                            {cityData.map(x => <option  key={x.id} value={x}>{x.name}  </option>)}
-                        </Input>
-                    </FormGroup>
+                    {selectedType === 'contractor' &&
+                        <React.Fragment>
+                            <FormGroup>
+                                <Label className="primary-text">Select Country</Label>
+                                <Input onChange={handleChange} type="select" name="country" id="country">
+                                    <option default value={""}>Please Select A country</option>
+                                    {countryData.map(x => <option key={x.id} value={JSON.stringify(x)}>{x.name}  </option>)}
+                                </Input>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label className="primary-text">Select State</Label>
+                                <Input onChange={handleChange} type="select" name="state" id="state">
+                                    <option default value={""}>Please Select A State</option>
+                                    {stateData.map(x => <option key={x.id} value={JSON.stringify(x)}>{x.name}  </option>)}
+                                </Input>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label className="primary-text">Select City</Label>
+                                <Input onChange={handleChange} type="select" name="city" id="city"  >
+                                    <option default value={""}>Please Select A City</option>
+                                    {cityData.map(x => <option key={x.id} value={JSON.stringify(x)}>{x.name}  </option>)}
+                                </Input>
+                            </FormGroup>
+                        </React.Fragment>
+                    }
                 </Col>
             </Row>
-            <Button outline onClick={handleSubmit} color="success">Signup</Button> {' '}
-            <Button outline color="danger">Back</Button>
+            <Button type="submit" value="submit" outline color="success">Signup</Button> {' '}
+            <Link to="/"><Button outline color="danger">Back</Button></Link>
         </Form>
     </div>);
 }

@@ -8,7 +8,8 @@ import Navbar from './components/navbar';
 import Sidebar from './containers/sidebar';
 import Login from './components/login';
 import Register from './containers/register';
-import Loader from './components/loader';
+
+import {getTypes} from './actionMethods/authMethods';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,14 +17,16 @@ class App extends React.Component {
     this.state = {}
   }
 
+  componentDidMount() {
+    this.props.getTypes();
+  }
+
   render() {
-    const {loading} = this.props;
     const PublicRoute = ({ component: Component, ...rest }) => {
       return (
         <Route {...rest} render={(routeProps) => (
           !this.props.user ? <div className="app-wrapper">
               <Navbar />
-              {/* {loading.value && <Loader />} */}
               <Component {...routeProps} />
           </div > :
             <Redirect to='/' />)
@@ -38,7 +41,6 @@ class App extends React.Component {
             <Sidebar />
             <div className="sidebar-open-body">
               <Navbar />
-              {loading.value && <Loader />}
               <Component {...routeProps} />
             </div>
           </div> :
@@ -55,11 +57,10 @@ class App extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({getTypes}, dispatch);
 const mapStateToProps = (state) => {
   return {
-    user: state.auth.user,
-    loading: state.loading
+    user: state.auth.user
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);

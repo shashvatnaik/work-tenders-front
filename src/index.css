@@ -20,10 +20,21 @@ code {
 .paper {
   background: white;
   border-radius: 10px;
-  -webkit-box-shadow: 1px 1px 10px 2px rgba(0,0,0,0.5);
-  -moz-box-shadow: 1px 1px 10px 2px rgba(0,0,0,0.5);
-  box-shadow: 1px 1px 10px 2px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 3px 3px 10px -2px rgba(0,0,0,0.75);
+  -moz-box-shadow: 3px 3px 10px -2px rgba(0,0,0,0.75);
+  box-shadow: 3px 3px 10px -2px rgba(0,0,0,0.75);
   margin: 20px;
+}
+
+.login-paper {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 17px -10px rgba(0,0,0,0.75);
+  margin-top: 13vh; 
+  margin-left: 33vw;
+  width: 33vw;
+  height: 55vh;
+  padding: 20px;
 }
 
 .logo-sidebar{

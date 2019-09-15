@@ -4,9 +4,11 @@ import { connectRouter } from 'connected-react-router';
 
 import auth from './auth';
 import loading from './loading';
+import alert from './alert';
 
 export default (history) => combineReducers({
     router: connectRouter(history),
     auth,
-    loading
+    loading,
+    alert
 });
