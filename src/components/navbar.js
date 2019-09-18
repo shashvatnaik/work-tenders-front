@@ -15,7 +15,7 @@ import {
 
 import {Link} from 'react-router-dom';
 
-export default (props) => {
+const NavBar = (props) => {
   const [isOpen, toggle] = useState(false);
   const { user } = props;
   return (<div>
@@ -52,3 +52,5 @@ export default (props) => {
     </Navbar>
   </div>)
 }
+
+export default NavBar;
