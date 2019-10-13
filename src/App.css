@@ -32,9 +32,18 @@
   }
 }
 
+.tenderImage {
+  height: 45vh;
+  width: 40vw;
+}
+
 .user-type {
   height: 2vh;
   width: 2vw;
+}
+
+.page-title {
+  margin: 5vh;
 }
 
 .loader {

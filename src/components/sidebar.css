@@ -78,14 +78,13 @@ body {
     width: auto !important;
 }
 .sidebar-open-body {
-    width: calc(100% - 64px);
+    width: calc(100% - 9vh);
     height: 100vh;
     position: relative;
-    left: 4.01%;
+    left: 4.51%;
     z-index: 999;
     background: #eef1f7;
     transition: left .3s ease-in-out;
-
 }
 .sidebar:hover ~ .sidebar-open-body {
     left: 15%;
@@ -118,7 +117,7 @@ body {
 }
 /*Collapsible Sidebar*/
 .sidebar.hide {
-    width: 4%;
+    width: 5%;
 }
 .sidebar.hide .nav-link span {
     display: none;
@@ -235,15 +234,23 @@ body {
 
 }
 
+a span {
+    margin-left: 1vw;
+}
+
 
 @media only screen and (min-width:1700px) and (max-width:2560px){
     .sidebar-open-body {
-        height: 100% !important;
+        height: 100vh !important;
     }
 
     .sidebar:hover {
         max-width: 15.7% !important;
         width: 15.7% !important;
+    }
+
+    .nav {
+        margin-left: 12px;
     }
 }
 
@@ -253,10 +260,16 @@ body {
     .sidebar-open-body {
         height: 100vh !important;
         overflow-y: scroll;
-        width: calc(100% - 57px);
+        width: calc(100% - 40px);
+        left: 4.01%;
     }
+
     .full-width {
         width: 100%!important;
+    }
+
+    .sidebar.hide {
+        width: 4%;
     }
 
     .tender-form {

@@ -12,6 +12,7 @@ export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const SET_USER = 'SET_USER';
 export const GET_USER_TYPES = 'GET_USER_TYPES';
+export const EDIT_USER = 'EDIT_USER';
 
 export default (state = initialState, action) => {
     switch(action.type) {
@@ -21,6 +22,9 @@ export default (state = initialState, action) => {
         case LOGIN:
             state.user = action.payload.user;
             state.token = action.payload.token;
+            return _.cloneDeep(state);
+        case EDIT_USER:
+            state.user = {...state.user, ...action.payload};
             return _.cloneDeep(state);
         case GET_USER_TYPES:
             state.allUserTypes = action.payload;

@@ -20,10 +20,27 @@ code {
 .paper {
   background: white;
   border-radius: 10px;
-  -webkit-box-shadow: 3px 3px 10px -2px rgba(0,0,0,0.75);
-  -moz-box-shadow: 3px 3px 10px -2px rgba(0,0,0,0.75);
-  box-shadow: 3px 3px 10px -2px rgba(0,0,0,0.75);
-  margin: 20px;
+  box-shadow: 0px 0px 17px -10px rgba(0,0,0,0.75);
+  margin: 2vw;
+  width: 95%;
+  height: 100%;
+  padding: 20px;
+}
+
+.tenderCard {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 17px -10px rgba(0,0,0,0.75);
+  margin: 10px auto;
+  width: 80%;
+  padding: 20px;
+  align-self: center;
+  align-content: center;
+}
+
+.tenderCard img {
+  height: 15vh;
+  width: 10vw;
 }
 
 .login-paper {
@@ -33,8 +50,12 @@ code {
   margin-top: 13vh; 
   margin-left: 33vw;
   width: 33vw;
-  height: 55vh;
+  height: 38vh;
   padding: 20px;
+}
+
+.fixedHeight {
+  height: 84vh;
 }
 
 .logo-sidebar{
@@ -43,6 +64,16 @@ code {
   margin: 0 auto;
   display: table;
   text-align: center;
+}
+
+.profile {
+  height: 6vh;
+  border-radius: 50%;
+  width: 3.5vw;
+}
+
+.cursorPointer {
+  cursor: pointer;
 }
 
 .center-text {

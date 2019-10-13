@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import firebase from 'firebase';
 
 import './App.css';
 import Navbar from './components/navbar';
@@ -9,8 +10,9 @@ import Sidebar from './containers/sidebar';
 import Login from './components/login';
 import Register from './containers/register';
 import Home from './containers/home';
+import CreateTender from './containers/createTender';
 
-import {getTypes} from './actionMethods/authMethods';
+import { getTypes, editUserLocalMethod } from './actionMethods/authMethods';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,13 +24,26 @@ class App extends React.Component {
     this.props.getTypes();
   }
 
+  componentDidUpdate() {
+    const { user, editUserLocalMethod } = this.props;
+    if (user && user.profile && !user.profileUrl) {
+      console.log(user.profile);
+      firebase.storage().ref("Images").child(user.profile).getDownloadURL().then(url => {
+        user.profileUrl = url;
+        editUserLocalMethod(user);
+      }).catch(error => {
+        console.log(error);
+      });
+    }
+  }
+
   render() {
     const PublicRoute = ({ component: Component, ...rest }) => {
       return (
         <Route {...rest} render={(routeProps) => (
           !this.props.user ? <div className="app-wrapper">
-              <Navbar />
-              <Component {...routeProps} />
+            <Navbar />
+            <Component {...routeProps} />
           </div > :
             <Redirect to='/' />)
         } />
@@ -41,7 +56,7 @@ class App extends React.Component {
           this.props.user ? <div className="app-wrapper">
             <Sidebar />
             <div className="sidebar-open-body">
-              <Navbar />  
+              <Navbar user={this.props.user} />
               <Component {...routeProps} />
             </div>
           </div> :
@@ -53,15 +68,17 @@ class App extends React.Component {
         <PublicRoute exact path='/login' component={Login} />
         <PublicRoute exact path='/register' component={Register} />
         <PrivateRoute exact path='/' component={Home} />
+        <PrivateRoute exact path='/createtender' component={CreateTender} />
       </Switch>
     )
   }
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({getTypes}, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ getTypes, editUserLocalMethod }, dispatch);
 const mapStateToProps = (state) => {
   return {
-    user: state.auth.user
+    user: state.auth.user,
+    allUserTypes: state.auth.allUserTypes
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);
