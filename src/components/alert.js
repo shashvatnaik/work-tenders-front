@@ -13,7 +13,7 @@ const Alert = (props) => {
                 {alert.header}
             </ModalHeader>
             <ModalBody>
-                {alert.message.length && alert.message.map(x => <React.Fragment>{x}<br/></React.Fragment>)}
+                {alert.message && alert.message.length && alert.message.map(x => <React.Fragment>{x}<br/></React.Fragment>)}
             </ModalBody>
             <ModalFooter>
                 <Button color="success" onClick={removeAlertMethod}>OK</Button>

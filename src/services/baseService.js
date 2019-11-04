@@ -1,9 +1,9 @@
 import axios from 'axios';
 import store from '../store';
 import {LOGOUT} from "../reducers/auth";
-const heroku = 'https://work-tenders.herokuapp.com';
-//const local = 'http://localhost:5000'; 
-export const baseURL = heroku;
+//const heroku = 'https://work-tenders.herokuapp.com';
+const local = 'http://localhost:5000'; 
+export const baseURL = local;
 const baseService  = axios.create({ baseURL  });
 export const Service = axios.create({ baseURL });
 

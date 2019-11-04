@@ -41,7 +41,7 @@ export const getTypes = () => dispatch => {
     }).catch((error) => {
         dispatch({ type: DISABLE_LOADING });
         console.log(error);
-        dispatch({ type: SHOW_MESSAGE, payload: { header: 'Error in getting Types', message: error.message } });
+        dispatch({ type: SHOW_MESSAGE, payload: { header: 'Error in getting Types', message: [error.message] } });
     });
 }
 

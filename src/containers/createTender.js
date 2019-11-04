@@ -71,7 +71,9 @@ class CreateTender extends React.Component {
         event.preventDefault();
         event.stopPropagation();
         console.log(this.state.form);
-        this.props.addTenderMethod(this.state.form);
+        this.props.addTenderMethod(this.state.form, () => {
+            this.props.history.push('/');
+        });
     }
 
     render() {

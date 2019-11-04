@@ -27,6 +27,8 @@ class Home extends React.Component {
             {tenders.map(x => <TenderCard
                 title={x.title}
                 description={x.description}
+                imageSrc={x.imageUrl}
+                id={x._id}
             />)}
         </React.Fragment>)
     }

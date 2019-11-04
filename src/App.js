@@ -11,6 +11,8 @@ import Login from './components/login';
 import Register from './containers/register';
 import Home from './containers/home';
 import CreateTender from './containers/createTender';
+import Profile from './containers/profile';
+import Tender from './containers/tender';
 
 import { getTypes, editUserLocalMethod } from './actionMethods/authMethods';
 
@@ -69,6 +71,8 @@ class App extends React.Component {
         <PublicRoute exact path='/register' component={Register} />
         <PrivateRoute exact path='/' component={Home} />
         <PrivateRoute exact path='/createtender' component={CreateTender} />
+        <PrivateRoute exact path='/profile' component={Profile} />
+        <PrivateRoute exact path="/tender/:tenderId" component={Tender} />
       </Switch>
     )
   }
