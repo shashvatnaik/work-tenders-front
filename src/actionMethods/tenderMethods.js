@@ -50,10 +50,11 @@ export const getOneTender = (id, cb) => dispatch => {
     })
 }
 
-export const deleteTender = tenderId => dispatch => {
+export const deleteTender = (tenderId, cb) => dispatch => {
     dispatch({ type: ENABLE_LOADING });
-    baseService.delete('/tender', { tenderId }).then(() => {
+    baseService.delete(`/tender?tenderId=${tenderId}`).then(() => {
         dispatch({ type: DISABLE_LOADING });
+        cb();
     }).catch((error) => {
         dispatch({ type: DISABLE_LOADING });
         console.log(error);

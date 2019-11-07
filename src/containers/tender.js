@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import csc from 'country-state-city';
 import firebase from 'firebase';
 
-import { getOneTender } from '../actionMethods/tenderMethods';
+import { getOneTender, deleteTender } from '../actionMethods/tenderMethods';
 import { getCategoriesMethod } from '../actionMethods/getDataMethods';
 import { enableLoading, disableLoading } from '../actionMethods/loadingMethods';
 import Loader from '../components/loader';
@@ -28,7 +28,7 @@ class Tender extends React.Component {
         getCategoriesMethod();
         if (!allTenders.length) {
             getOneTender(this.state.tenderId, (tender) => {
-                this.setState({ form: { ...tender }, imageData: {avatarURL: tender.imageUrl}, countries: csc.getAllCountries() });
+                this.setState({ form: { ...tender }, imageData: { avatarURL: tender.imageUrl }, countries: csc.getAllCountries() });
             });
         }
     }
@@ -48,7 +48,7 @@ class Tender extends React.Component {
             tender = this.props.allTenders.find(tender => tender._id === this.state.tenderId);
         }
         debugger;
-        this.setState({ mode: !this.state.mode, form: tender, imageData: {avatarURL: tender.imageUrl} });
+        this.setState({ mode: !this.state.mode, form: tender, imageData: { avatarURL: tender.imageUrl } });
     }
 
     changeHandler = name => event => {
@@ -93,7 +93,7 @@ class Tender extends React.Component {
 
     render() {
         const { tenderId, mode, form, countries, states, cities, imageData } = this.state;
-        const { loading, allTenders, allCategories } = this.props;
+        const { loading, allTenders, allCategories, allUserTypes, user, deleteTender, history: { goBack } } = this.props;
         const tender = allTenders.find(tender => tender._id === tenderId);
         return (
             <React.Fragment>
@@ -125,8 +125,11 @@ class Tender extends React.Component {
                     }
                 /> :
                     <ViewTender
+                        goBack={goBack}
+                        deleteTender={deleteTender}
                         tender={tender}
                         toggleMode={this.toggleMode}
+                        contractor={allUserTypes.length && allUserTypes.find(x => x._id === user.type).name === 'contractor'}
                     />
                 }
             </React.Fragment>
@@ -138,12 +141,15 @@ const mapStateToProps = state => ({
     loading: state.loading,
     alert: state.alert,
     allTenders: state.tenders,
-    allCategories: state.formData.allCategories
+    allCategories: state.formData.allCategories,
+    allUserTypes: state.auth.allUserTypes,
+    user: state.auth.user
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
     getOneTender,
     getCategoriesMethod,
     enableLoading,
     disableLoading,
+    deleteTender
 }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(Tender);

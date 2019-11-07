@@ -1,16 +1,21 @@
 import React from 'react';
 import { Row, Col, Label, Button } from 'reactstrap';
+import {Link} from 'react-router-dom';
 
 import defaultImage from '../images/default.png';
 
 export default (props) => {
-    const { tender, toggleMode } = props;
+    const { tender, toggleMode, contractor, deleteTender, goBack } = props;
     return tender ? (
         <div className="paper fixedHeight primary-text">
             <h3>Tender Details:</h3>
             <Row>
-                <Col sm={{ size: 'auto', offset: 6 }} md={{ size: 'auto', offset: 10 }}><Button color="info" onClick={toggleMode}>Edit</Button>{" "}
-                    <Button color="danger ">Delete</Button></Col>
+                <Col sm={{ size: 'auto', offset: 6 }} md={{ size: 'auto', offset: 10 }}>
+                    {contractor ? <Button color="success"><Link className="link-black" to={`/${tender._id}/createBid`}>Place a Bid</Link></Button> : <React.Fragment>
+                    <Button color="info" onClick={toggleMode}>Edit</Button>{" "}
+                    <Button color="danger" onClick={() => {deleteTender(tender._id, goBack)}}>Delete</Button> {" "}
+                    </React.Fragment>}
+                </Col>
             </Row>
             <Row>
                 <Col>

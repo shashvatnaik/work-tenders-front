@@ -48,6 +48,16 @@ code {
   text-underline-position: above;
 }
 
+.link-black {
+  color: black;
+  text-underline-position: above;
+}
+
+.link-black:hover {
+  color: black;
+  text-underline-position: above;
+}
+
 .tenderCard img {
   height: 15vh;
   width: 10vw;

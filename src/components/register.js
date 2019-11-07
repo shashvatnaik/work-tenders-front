@@ -79,7 +79,7 @@ const Register = (props) => {
                             </FormGroup>
                             <FormGroup>
                                 <Label className="primary-text">Select City</Label>
-                                <Input onChange={handleChange} type="select" name="city" id="city"  >
+                                <Input onChange={handleChange} type="select" name="city" id="city">
                                     <option default value={""}>Please Select A City</option>
                                     {cityData.map(x => <option key={x.id} value={JSON.stringify(x)}>{x.name}  </option>)}
                                 </Input>

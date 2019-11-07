@@ -7,6 +7,7 @@ import loading from './loading';
 import alert from './alert';
 import formData from './formData';
 import tenders from './tenders';
+import bids from './bids';
 
 export default (history) => combineReducers({
     router: connectRouter(history),
@@ -14,5 +15,6 @@ export default (history) => combineReducers({
     loading,
     alert,
     formData,
-    tenders
+    tenders,
+    bids
 });
